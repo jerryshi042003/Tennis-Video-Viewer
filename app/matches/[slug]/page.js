@@ -1,7 +1,12 @@
 'use client'
 
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation' // Updated import for usePathname
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams
+} from 'next/navigation'
 
 import { useData } from '@/app/DataProvider'
 import { filterGroups } from '@/app/services/filterGroups'
@@ -36,7 +41,8 @@ const findDisplayName = (key) => {
   return key // Fallback to key if no display name found
 }
 
-const MatchPage = ({ params }) => {
+const MatchPage = () => {
+  const params = useParams()
   const { matches, fetchMatchDetails } = useData()
   const [matchData, setMatchData] = useState(null)
   const [loading, setLoading] = useState(true)

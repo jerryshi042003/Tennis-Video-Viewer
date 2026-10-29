@@ -2,11 +2,7 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '@/app/services/initializeFirebase'
 import { notFound } from 'next/navigation'
-import dynamic from 'next/dynamic'
-
-const PlayerProfile = dynamic(() => import('@/app/components/PlayerProfile'), {
-  ssr: false
-})
+import PlayerProfile from '@/app/components/PlayerProfile'
 
 // Server Side Rendering to fetch player data
 async function getPlayerData(playerId) {
@@ -62,9 +58,9 @@ async function getPlayerData(playerId) {
       age: targetPlayer.age,
       photo: targetPlayer.photo || null,
       largePlayerPhoto: targetPlayer.largePlayerPhoto || null,
-      overallWins: targetPlayer.stats?.overallWins || 0,
-      singleWins: targetPlayer.stats?.singleWins || 0,
-      doubleWins: targetPlayer.stats?.doubleWins || 0
+      overallWins: targetPlayer.stats?.overallWins ?? null,
+      singleWins: targetPlayer.stats?.singleWins ?? null,
+      doubleWins: targetPlayer.stats?.doubleWins ?? null
     }
   } catch (error) {
     console.error('Error retrieving player details:', error)
@@ -73,10 +69,11 @@ async function getPlayerData(playerId) {
 }
 
 export default async function PlayerProfilePage({ params }) {
-  const playerData = await getPlayerData(params.playerId)
+  const { playerId } = await params
+  const playerData = await getPlayerData(playerId)
   if (!playerData) {
     notFound() // This will show the not-found.js page
   }
 
-  return <PlayerProfile playerData={playerData} playerId={params.playerId} />
+  return <PlayerProfile playerData={playerData} playerId={playerId} />
 }

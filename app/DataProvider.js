@@ -32,10 +32,7 @@ export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null)
 
   // For Logos
-  const [logos, setLogos] = useState(() => {
-    const storedLogos = localStorage.getItem('teamLogos')
-    return storedLogos ? JSON.parse(storedLogos) : {}
-  })
+  const [logos, setLogos] = useState({})
   const [logosLoading, setLogosLoading] = useState(!Object.keys(logos).length)
   const [logosError, setLogosError] = useState(null)
 
