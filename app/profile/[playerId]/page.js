@@ -58,9 +58,9 @@ async function getPlayerData(playerId) {
       age: targetPlayer.age,
       photo: targetPlayer.photo || null,
       largePlayerPhoto: targetPlayer.largePlayerPhoto || null,
-      overallWins: targetPlayer.stats?.overallWins || 0,
-      singleWins: targetPlayer.stats?.singleWins || 0,
-      doubleWins: targetPlayer.stats?.doubleWins || 0
+      overallWins: targetPlayer.stats?.overallWins ?? null,
+      singleWins: targetPlayer.stats?.singleWins ?? null,
+      doubleWins: targetPlayer.stats?.doubleWins ?? null
     }
   } catch (error) {
     console.error('Error retrieving player details:', error)
