@@ -1,4 +1,6 @@
 import Footer from '@/app/components/Footer'
+import { Suspense } from 'react'
+import Loading from '@/app/components/Loading'
 import { AuthProvider } from '@/app/AuthWrapper'
 import { DataProvider } from '@/app/DataProvider'
 import ConditionalNavbar from './components/ConditonalNavBar'
@@ -33,7 +35,9 @@ export default function RootLayout({ children }) {
         <div className={`${dmSans.className} root`}>
           <AuthProvider>
             <ConditionalNavbar />
-            <DataProvider>{children}</DataProvider>
+            <Suspense fallback={<Loading prompt="Loading match tools..." />}>
+              <DataProvider>{children}</DataProvider>
+            </Suspense>
           </AuthProvider>
         </div>
         <Footer />
