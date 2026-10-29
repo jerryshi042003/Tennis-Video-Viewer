@@ -40,10 +40,10 @@ const PlayerProfileHeader = ({ playerData }) => {
           <div className={styles.statBoxes}>
             <StatBox
               stat="Overall Wins"
-              statNum={playerData.overallWins || 50}
+              statNum={playerData.overallWins ?? 0}
             />
-            <StatBox stat="Single Wins" statNum={playerData.singleWins || 25} />
-            <StatBox stat="Double Wins" statNum={playerData.doubleWins || 25} />
+            <StatBox stat="Single Wins" statNum={playerData.singleWins ?? 0} />
+            <StatBox stat="Double Wins" statNum={playerData.doubleWins ?? 0} />
           </div>
         </div>
       </div>
